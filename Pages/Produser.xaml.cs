@@ -17,11 +17,11 @@ using WpfAppAutorisation.Models;
 namespace WpfAppAutorisation.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Client.xaml
+    /// Логика взаимодействия для Produser.xaml
     /// </summary>
-    public partial class Client : Page
+    public partial class Produser : Page
     {
-        public Client()
+        public Produser(Producers producers)
         {
             InitializeComponent();
         }

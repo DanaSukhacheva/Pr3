@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cb91b56b4761481a94b81a62a208f2f1" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Albums" Width="1.5" PointX="10.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Authorization" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Circulations" Width="1.5" PointX="12.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Employees" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Equipment" Width="1.5" PointX="13.5" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Equipment_type" Width="1.5" PointX="11.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Geners" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Geners_Singers" Width="1.5" PointX="10.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Jobtitles" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Orders" Width="1.5" PointX="13.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Orders_Servises" Width="1.5" PointX="8.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Personal_data" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Producers" Width="1.5" PointX="6" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Recordings" Width="1.5" PointX="11.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Rooms" Width="1.5" PointX="11.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Sales" Width="1.5" PointX="12.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Services" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Singers" Width="1.5" PointX="8.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Status" Width="1.5" PointX="11.25" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Stories" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Albums_Singers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Circulations_Albums" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Recordings_Albums" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Sales_Albums" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Employees_Authorization" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Producers_Authorization" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Employees_Jobtitles" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Employees_Personal_data" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Orders_Servises_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Equipment_Equipment_type" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Equipment_Rooms" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Geners_Singers_Geners" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Geners_Singers_Singers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Orders_Servises_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Orders_Rooms" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Orders_Singers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Orders_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Orders_Servises_Services" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Producers_Personal_data" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Singers_Personal_data" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Recordings_Producers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Singers_Producers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Recordings_Singers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Sales_Stories" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -17,11 +17,11 @@ using WpfAppAutorisation.Models;
 namespace WpfAppAutorisation.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Client.xaml
+    /// Логика взаимодействия для Employee.xaml
     /// </summary>
-    public partial class Client : Page
+    public partial class Employee : Page
     {
-        public Client()
+        public Employee(Employees employee, string jobTitle)
         {
             InitializeComponent();
         }

@@ -24,7 +24,7 @@ namespace WpfAppAutorisation
         public MainWindow()
         {
             InitializeComponent();
-            FrmMain.Navigate(new Autho());
+            FrmMain.Content = new Autho();
         }
 
         private void FrmMain_ContentRendered(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace WpfAppAutorisation
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-
+            FrmMain.GoBack();
         }
     }
 }
