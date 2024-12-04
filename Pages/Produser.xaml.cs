@@ -21,7 +21,7 @@ namespace WpfAppAutorisation.Pages
     /// </summary>
     public partial class Produser : Page
     {
-        public Produser(Producers producers)
+        public Produser(Producers producers, string greeting)
         {
             InitializeComponent();
         }

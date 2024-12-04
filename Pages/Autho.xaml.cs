@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,22 +26,22 @@ namespace WpfAppAutorisation.Pages
     /// </summary>
     public partial class Autho : Page
     {
-        private int click;
+        private int click;       //jkj
         private static int failedAttempts;
         private DispatcherTimer lockTimer;
         private int lockTimeRemaining;
         public Autho()
         {
-            InitializeComponent();
-            click = 0;
+            InitializeComponent(); //
+            click = 0;             //
             failedAttempts = 0;
             lockTimer = new DispatcherTimer();
             lockTimer.Interval = TimeSpan.FromSeconds(1);
             lockTimer.Tick += LockTimer_Tick;
-            ClearFields();
+            ClearFields();   //
         }
 
-        private void btnEnterGuest_Click(object sender, RoutedEventArgs e)
+        private void btnEnterGuest_Click(object sender, RoutedEventArgs e)   //
         {
             NavigationService.Navigate(new Client());
         }
@@ -53,7 +55,7 @@ namespace WpfAppAutorisation.Pages
             txtBlockCaptcha.Text = capctchaText;
             txtBlockCaptcha.TextDecorations = TextDecorations.Strikethrough;
         }
-        private void btnEnter_Click(object sender, RoutedEventArgs e)
+        private void btnEnter_Click(object sender, RoutedEventArgs e)   ///
         {
             click += 1;
             string login = txtbLogin.Text.Trim();
@@ -73,6 +75,12 @@ namespace WpfAppAutorisation.Pages
             {
                 if (user != null)
                 {
+                    if (user.Employees != null && !IsWorkingHours())
+                    {
+                        MessageBox.Show("Access denied. Working hours are from 10:00 to 19:00.");
+                        return;
+                    }
+
                     MessageBox.Show("You enter as: " + user.login.ToString());
                     LoadPage(user);
 
@@ -131,10 +139,10 @@ namespace WpfAppAutorisation.Pages
                     switch (jobTitl)
                     {
                         case "менеджер студии":
-                            NavigationService.Navigate(new Employee(emp, jobTitl));
+                            NavigationService.Navigate(new Employee(emp, jobTitl, GetGreeting(emp)));
                             break;
                         case "помощник звукорежиссера":
-                            NavigationService.Navigate(new Employee(emp, jobTitl));
+                            NavigationService.Navigate(new Employee(emp, jobTitl, GetGreeting(emp)));
                             break;
                         default:
                             MessageBox.Show("Unknown role. Access denied.");
@@ -146,7 +154,7 @@ namespace WpfAppAutorisation.Pages
             var producers = db.Producers.Where(x => x.ID_authorization == user.ID_authorization).FirstOrDefault();
             if (producers != null)
             {
-                NavigationService.Navigate(new Produser(producers));
+                NavigationService.Navigate(new Produser(producers, GetGreeting(producers)));
             }
          
             
@@ -192,6 +200,55 @@ namespace WpfAppAutorisation.Pages
                 txtBoxCaptcha.IsEnabled = true;
                
             }
+        }
+        private string GetGreeting(Employees emp)
+        {
+            SoundEntities db = SoundEntities.GetContext();
+            var persdata = db.Personal_data.Where(x => x.ID_personal_data ==  emp.ID_personal_data).FirstOrDefault();
+            if (persdata != null)
+            {
+                string fullName = $"{persdata.surname} {persdata.name} {persdata.patronymic}";
+                string timeOfDay = GetTimeOfDay();
+                return $"{timeOfDay} {fullName}";
+            }
+            return null;
+        }
+        private string GetGreeting(Producers prod)
+        {
+            SoundEntities db = SoundEntities.GetContext();
+            var proddata  = db.Personal_data.Where(p => p.ID_personal_data == prod.ID_personal_data).FirstOrDefault(); 
+            if (proddata != null) 
+            { 
+                string fullNameProd = $"{proddata.surname} {proddata.name} {proddata.patronymic}";
+                string timeOfDay = GetTimeOfDay();
+                return $"{timeOfDay} {fullNameProd}";
+            }
+            return null;
+        }
+        private string GetTimeOfDay()
+        {
+            int hour = DateTime.Now.Hour;
+            if (hour >= 10 && hour < 12)
+            {
+                return "Добрый Утро";
+            }
+            else if (hour >= 12 && hour < 17)
+            {
+                return "Добрый День";
+            }
+            else if (hour >= 17 && hour < 19)
+            {
+                return "Добрый Вечер";
+            }
+            else
+            {
+                return "Доброй ночи";
+            }
+        }
+        private bool IsWorkingHours()
+        {
+            int hour = DateTime.Now.Hour;
+            return hour >= 10 && hour < 19;
         }
     }
 }

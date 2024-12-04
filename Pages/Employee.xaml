@@ -9,6 +9,6 @@
       Title="Employee">
 
     <Grid>
-        
+        <TextBlock x:Name="Greeting" />
     </Grid>
 </Page>

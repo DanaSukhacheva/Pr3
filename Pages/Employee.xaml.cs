@@ -21,9 +21,10 @@ namespace WpfAppAutorisation.Pages
     /// </summary>
     public partial class Employee : Page
     {
-        public Employee(Employees employee, string jobTitle)
+        public Employee(Employees employee, string jobTitle, string greeting)
         {
             InitializeComponent();
+            Greeting.Text = greeting;
         }
     }
 }
