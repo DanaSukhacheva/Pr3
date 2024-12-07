@@ -17,15 +17,15 @@ using WpfAppAutorisation.Models;
 namespace WpfAppAutorisation.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Client.xaml
+    /// Логика взаимодействия для EmployeeList.xaml
     /// </summary>
-    public partial class Client : Page
+    public partial class EmployeeList : Page
     {
-        public Client()
+        public EmployeeList()
         {
             InitializeComponent();
-            var servise = SoundEntities.GetContext().Services.ToList();
-            lViewServise.ItemsSource = servise;
+            var employee = SoundEntities.GetContext().Personal_data.ToList();
+            lViewEmployees.ItemsSource = employee;
         }
     }
 }

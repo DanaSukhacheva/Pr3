@@ -144,9 +144,13 @@ namespace WpfAppAutorisation.Pages
                         case "помощник звукорежиссера":
                             NavigationService.Navigate(new Employee(emp, jobTitl, GetGreeting(emp)));
                             break;
+                        case "администратор":
+                            NavigationService.Navigate(new EmployeeList());
+                            break;
                         default:
                             MessageBox.Show("Unknown role. Access denied.");
                             break;
+
 
                     }
                 }
