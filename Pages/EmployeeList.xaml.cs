@@ -24,8 +24,38 @@ namespace WpfAppAutorisation.Pages
         public EmployeeList()
         {
             InitializeComponent();
-            var employee = SoundEntities.GetContext().Personal_data.ToList();
-            lViewEmployees.ItemsSource = employee;
+            var db = SoundEntities.GetContext();
+            var emps = db.Employees.ToList();
+            List<EmpData> empDatas = new List<EmpData>();
+            List<Personal_data> employees = new List<Personal_data>();
+            foreach (var emp in emps) 
+            {
+                EmpData empData = new EmpData(emp, emp.Personal_data);
+                empDatas.Add(empData);
+                employees.Add(emp.Personal_data);
+            }
+
+            
+            lViewEmployees.ItemsSource = employees;
+          
+            
+        }
+
+        private void lViewEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            Personal_data employees = btn.DataContext as Personal_data;
+            NavigationService.Navigate(new EmInformation(employees));
+        }
+
+        private void Button_newempl_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new EmInformation(null));
         }
     }
 }

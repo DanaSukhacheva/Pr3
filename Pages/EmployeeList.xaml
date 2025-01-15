@@ -9,13 +9,13 @@
       Title="EmployeeList"
       Background="White">
 
-                          
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="280"/>
             <ColumnDefinition Width="280"/>
-            <ColumnDefinition Width="380"/>
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="38"/>
@@ -24,20 +24,16 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
-        
+
         <TextBox Name="txtSearch" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5, 0, 5, 0" />
         <ComboBox Name="cmsSorting" Grid.Row="1" Grid.Column="1" SelectedIndex="0" VerticalAlignment="Center" Margin="5, 0, 5, 0">
             <ComboBoxItem Content="По имени"/>
             <ComboBoxItem Content="По роли"/>
         </ComboBox>
-        <ComboBox Name="cmsFilter" Grid.Row="1" Grid.Column="2" SelectedIndex="0" Margin="5, 0, 5, 0" VerticalAlignment="Center">
-            <ComboBoxItem Content="Все роли"/>
-            <ComboBoxItem Content="Администратор"/>
-            <ComboBoxItem Content="Менеджер"/>
-        </ComboBox>
+        <Button x:Name="Button_newempl" Content="New employee" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="5, 0, 5, 0" Click="Button_newempl_Click"/>
 
-       
-        <ListView Name="lViewEmployees" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Margin="5,5,10,5" d:ItemsSource="{d:SampleData ItemCount=1}">
+
+        <ListView Name="lViewEmployees" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Margin="5,5,5,5" d:ItemsSource="{d:SampleData ItemCount=1}" SelectionChanged="lViewEmployees_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -53,20 +49,21 @@
                                 <ColumnDefinition Width="180"/>
                             </Grid.ColumnDefinitions>
 
-                           
+
                             <Rectangle Width="80" Height="80" Fill="LightGray" VerticalAlignment="Center" Margin="10"/>
 
                             <StackPanel Grid.Column="1" Margin="10,12,10,48" Orientation="Horizontal">
-                                <TextBlock Text="{Binding name}" FontWeight="Bold" FontSize="14"/>
-                                <TextBlock Text="{Binding surname}" Foreground="Gray" Margin="5,5,0,0"/>
-                                
+                                <TextBlock Text="{Binding name}" Foreground="Black" FontSize="14"/>
+                                <TextBlock Text="{Binding surname}" Foreground="Black" Margin="5,5,0,0"/>
+                                <TextBlock Text="{Binding patronymic}" Foreground="Black" Margin="5,5,0,0"/>
+
                             </StackPanel>
                             <StackPanel Grid.Column="1" Margin="10,50,10,5" Orientation="Horizontal">
                                 <TextBlock Text="{Binding gmail}" Foreground="Blue" Margin="5,5,0,0"/>
                             </StackPanel>
 
-                          
-                            <Button Grid.Column="2" Content="Подробнее" HorizontalAlignment="Right" Margin="10"/>
+
+                            <Button Grid.Column="2" Content="Подробнее" HorizontalAlignment="Right" Margin="10" Click="Button_Click"/>
                         </Grid>
                     </Border>
                 </DataTemplate>

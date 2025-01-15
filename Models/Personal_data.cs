@@ -11,7 +11,8 @@ namespace WpfAppAutorisation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Personal_data
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,6 +28,7 @@ namespace WpfAppAutorisation.Models
         public string surname { get; set; }
         public string patronymic { get; set; }
         public string telephone { get; set; }
+
         public string gmail { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -35,5 +37,20 @@ namespace WpfAppAutorisation.Models
         public virtual ICollection<Producers> Producers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Singers> Singers { get; set; }
+
+        public string jobTitle 
+        {
+            get 
+            {
+                return SoundEntities.GetContext().Employees.FirstOrDefault(x => x.ID_personal_data == this.ID_personal_data).Jobtitles.title.ToString();
+            }
+        }
+
+        public long jobId {
+            get 
+            {
+                return SoundEntities.GetContext().Employees.FirstOrDefault(x => x.ID_personal_data == this.ID_personal_data).ID_jobtitle;
+            }
+        }
     }
 }

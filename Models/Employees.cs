@@ -11,7 +11,8 @@ namespace WpfAppAutorisation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.InteropServices.WindowsRuntime;
+
     public partial class Employees
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,5 +31,13 @@ namespace WpfAppAutorisation.Models
         public virtual Personal_data Personal_data { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders_Servises> Orders_Servises { get; set; }
+
+        public string RoleFromList 
+        {
+            get {
+
+                return "hfhgfhfg";
+            }
+        }
     }
 }
