@@ -38,7 +38,7 @@
                 </StackPanel>
             </Border>
             <Button Content="Очистить" Command="{Binding ClearCommand}" 
-                    Width="120" Padding="5" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10" Grid.Row="1"/>
+                    Width="120" Padding="5" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10" Grid.Row="1" Click="Button_Click_1"/>
         </Grid>
     </Grid>
 </Page>
