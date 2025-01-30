@@ -62,10 +62,8 @@ namespace WpfAppAutorisation.Pages
         }
         private void btnEnter_Click(object sender, RoutedEventArgs e)   ///
         {
-            cod = GenerateCode();
-            SendMail(email, cod);
-            codetb.Visibility = Visibility.Visible;
-            string code = codetb.Text;
+            
+            
             
 
             click += 1;
@@ -91,9 +89,17 @@ namespace WpfAppAutorisation.Pages
                         MessageBox.Show("Access denied. Working hours are from 10:00 to 19:00.");
                         return;
                     }
+                    cod = GenerateCode();
+                    SendMail(email, cod);
+                    codetb.Visibility = Visibility.Visible;
+                    string code = codetb.Text;
+                    if(cod == code)
+                    {
+                        MessageBox.Show("You enter as: " + user.login.ToString());
+                        LoadPage(user);
+                    }
 
-                    MessageBox.Show("You enter as: " + user.login.ToString());
-                    LoadPage(user);
+                    
 
                 }
                 else
