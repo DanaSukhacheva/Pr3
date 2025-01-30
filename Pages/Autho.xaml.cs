@@ -4,6 +4,8 @@ using System.Data;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,6 +32,9 @@ namespace WpfAppAutorisation.Pages
         private static int failedAttempts;
         private DispatcherTimer lockTimer;
         private int lockTimeRemaining;
+        private string cod = "";
+        public string email = "daniilsukhachev@yandex.ru";
+
         public Autho()
         {
             InitializeComponent(); //
@@ -57,6 +62,12 @@ namespace WpfAppAutorisation.Pages
         }
         private void btnEnter_Click(object sender, RoutedEventArgs e)   ///
         {
+            cod = GenerateCode();
+            SendMail(email, cod);
+            codetb.Visibility = Visibility.Visible;
+            string code = codetb.Text;
+            
+
             click += 1;
             string login = txtbLogin.Text.Trim();
             string password = pswbPassword.Text.Trim();
@@ -125,9 +136,11 @@ namespace WpfAppAutorisation.Pages
 
             }
         }
-        private void LoadPage(Authorization user)
+        private void LoadPage(Models.Authorization user)
         {
-            SoundEntities db = SoundEntities.GetContext();
+            
+
+           SoundEntities db = SoundEntities.GetContext();
             var emp = db.Employees.Where(x => x.ID_authorization == user.ID_authorization).FirstOrDefault();
             if (emp != null) 
             {
@@ -165,7 +178,27 @@ namespace WpfAppAutorisation.Pages
             click = 0;
             ClearFields();
         }
+        private static void SendMail(string email, string cod)
+        {
 
+            MailAddress from = new MailAddress("danasuhacheva@yandex.ru", "Dana");
+            MailAddress to = new MailAddress(email);
+            MailMessage m = new MailMessage(from, to);
+            m.Subject = "Test";
+            m.Body = $"Approval code: " + cod;
+            SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 587);
+            smtp.EnableSsl = true;
+            smtp.Credentials = new NetworkCredential("danasuhacheva@yandex.ru", "gykbgrmnzertqhfd");
+
+            smtp.Send(m);
+            MessageBox.Show("Email sent");
+        }
+        private string GenerateCode()
+        {
+            Random random = new Random();
+            int code = random.Next(1000, 10000);
+            return code.ToString();
+        }
         private void ClearFields()
         {
             txtbLogin.Text = string.Empty;
@@ -253,6 +286,21 @@ namespace WpfAppAutorisation.Pages
         {
             int hour = DateTime.Now.Hour;
             return hour >= 10 && hour < 19;
+        }
+
+        private void btnpassw_Click(object sender, RoutedEventArgs e)
+        {
+            SoundEntities db = SoundEntities.GetContext();
+            if (txtbLogin.Text != "")
+            {
+                string log = txtbLogin.Text.Trim();
+                Models.Authorization us = db.Authorization.Where(x => x.login == log).FirstOrDefault();
+                if (us != null)
+                {
+                    NavigationService.Navigate(new PasswordChange(us));
+                }
+            }
+            
         }
     }
 }

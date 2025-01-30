@@ -153,6 +153,9 @@
     <Compile Include="Pages\EmployeeList.xaml.cs">
       <DependentUpon>EmployeeList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PasswordChange.xaml.cs">
+      <DependentUpon>PasswordChange.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Produser.xaml.cs">
       <DependentUpon>Produser.xaml</DependentUpon>
     </Compile>
@@ -187,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EmployeeList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PasswordChange.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

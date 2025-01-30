@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfAppAutorisation.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="490" d:DesignWidth="800"
       Title="Autho">
 
     <Grid>
@@ -18,17 +18,21 @@
             <TextBlock Text="Login:"/>
             <TextBox x:Name="txtbLogin"/>
             <TextBlock Text="Password"/>
-            <TextBox x:Name="pswbPassword"/>
+            <TextBox x:Name="pswbPassword" />
+
             <TextBlock Visibility="Hidden" x:Name="txtBlockCaptcha" Text="Captcha"/>
             <TextBox Visibility="Hidden" x:Name="txtBoxCaptcha"/>
             <TextBlock HorizontalAlignment="Center" Visibility="Hidden" x:Name="txtBlockTimer"/>
+
             <TextBlock x:Name="txtBlockTimeRemaining" Foreground="Red" Visibility="Hidden" Text="Too many failed attempts. Try again in {lockTimeRemaining} seconds." HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="WrapWithOverflow"/>
             <StackPanel Orientation="Horizontal" Height="80" HorizontalAlignment="Center">
                 <Button x:Name="btnEnterGuest" Margin="5,15,5,5" Content="Enter as a guest" Click="btnEnterGuest_Click"/>
                 <Button x:Name="btnEnter" Margin="5,15,5,5" Content="Enter" Click="btnEnter_Click"/>
 
             </StackPanel>
+            <Button x:Name="btnpassw" Content="Forgot the password?" Width ="200" Height="30" Click="btnpassw_Click"/>
 
         </StackPanel>
+        <TextBox x:Name="codetb" Visibility="Hidden" Grid.Column="2" HorizontalAlignment="Left" Margin="89,100,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Page>
