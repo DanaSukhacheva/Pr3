@@ -33,6 +33,6 @@
             <Button x:Name="btnpassw" Content="Forgot the password?" Width ="200" Height="30" Click="btnpassw_Click"/>
 
         </StackPanel>
-        <TextBox x:Name="codetb" Visibility="Hidden" Grid.Column="2" HorizontalAlignment="Left" Margin="89,100,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="codetb" Visibility="Visible" Grid.Column="2" HorizontalAlignment="Left" Margin="89,100,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Page>

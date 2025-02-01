@@ -28,7 +28,7 @@ namespace WpfAppAutorisation.Pages
     /// </summary>
     public partial class Autho : Page
     {
-        private int click;       //jkj
+        private int click;    
         private static int failedAttempts;
         private DispatcherTimer lockTimer;
         private int lockTimeRemaining;
@@ -60,12 +60,8 @@ namespace WpfAppAutorisation.Pages
             txtBlockCaptcha.Text = capctchaText;
             txtBlockCaptcha.TextDecorations = TextDecorations.Strikethrough;
         }
-        private void btnEnter_Click(object sender, RoutedEventArgs e)   ///
+        private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
-            
-            
-            
-
             click += 1;
             string login = txtbLogin.Text.Trim();
             string password = pswbPassword.Text.Trim();
@@ -80,8 +76,15 @@ namespace WpfAppAutorisation.Pages
             string hash = Hash.HashPassword(password);
 
             var user = db.Authorization.Where(x => x.login == login && x.password == hash).FirstOrDefault();
-            if(click == 1)
+            if(click <= 3)
             {
+                if (click == 1)
+                {
+                    cod = GenerateCode();
+                    SendMail(email, cod);
+                    codetb.Visibility = Visibility.Visible;
+                    
+                }
                 if (user != null)
                 {
                     if (user.Employees != null && !IsWorkingHours())
@@ -89,30 +92,22 @@ namespace WpfAppAutorisation.Pages
                         MessageBox.Show("Access denied. Working hours are from 10:00 to 19:00.");
                         return;
                     }
-                    cod = GenerateCode();
-                    SendMail(email, cod);
-                    codetb.Visibility = Visibility.Visible;
-                    string code = codetb.Text;
-                    if(cod == code)
+                    string code = codetb.Text.Trim();
+                    if (code == cod)
                     {
                         MessageBox.Show("You enter as: " + user.login.ToString());
                         LoadPage(user);
                     }
-
-                    
-
                 }
                 else
                 {
-                    
                       MessageBox.Show("Enter your data again");
-                        GenerateCaptcha();
-                    
+                        GenerateCaptcha(); 
                 }
                 
             }
 
-            else if(click <=  2)
+            else if(click <=  11)
             {
                
                 string enteredCaptcha = txtBoxCaptcha.Text.Trim();
@@ -202,7 +197,7 @@ namespace WpfAppAutorisation.Pages
         private string GenerateCode()
         {
             Random random = new Random();
-            int code = random.Next(1000, 10000);
+            int code = random.Next(1000, 9999);
             return code.ToString();
         }
         private void ClearFields()
