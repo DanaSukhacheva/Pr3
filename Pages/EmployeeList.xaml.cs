@@ -48,14 +48,30 @@ namespace WpfAppAutorisation.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            Personal_data employees = btn.DataContext as Personal_data;
+            Button btn = sender as Button; // Преобразуем отправителя события в объект типа Button
+            Personal_data employees = btn.DataContext as Personal_data;// Получаем данные о сотруднике, привязанные к кнопке
             NavigationService.Navigate(new EmInformation(employees));
         }
 
         private void Button_newempl_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new EmInformation(null));
+        }
+
+        private void PrintListButton_Click(object sender, RoutedEventArgs e)
+        {
+            FlowDocument doc = fldocumentreader.Document;
+            if (doc == null)
+            {
+                MessageBox.Show("document not found");
+                return;
+            }
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                IDocumentPaginatorSource idpSource = doc;
+                printDialog.PrintDocument(idpSource.DocumentPaginator, "Список сотрудников");
+            }
         }
     }
 }

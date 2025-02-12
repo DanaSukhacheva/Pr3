@@ -26,48 +26,52 @@
 
 
         <TextBox Name="txtSearch" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5, 0, 5, 0" />
-        <ComboBox Name="cmsSorting" Grid.Row="1" Grid.Column="1" SelectedIndex="0" VerticalAlignment="Center" Margin="5, 0, 5, 0">
-            <ComboBoxItem Content="По имени"/>
-            <ComboBoxItem Content="По роли"/>
-        </ComboBox>
+        <Button Content="Печать списка" Margin="120,32,40,2" Click="PrintListButton_Click" Grid.Column="1" Grid.RowSpan="2"/>
         <Button x:Name="Button_newempl" Content="New employee" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="5, 0, 5, 0" Click="Button_newempl_Click"/>
 
-
-        <ListView Name="lViewEmployees" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Margin="5,5,5,5" d:ItemsSource="{d:SampleData ItemCount=1}" SelectionChanged="lViewEmployees_SelectionChanged">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Gray" BorderThickness="1" Background="White" Margin="5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="180"/>
-                            </Grid.ColumnDefinitions>
-
-
-                            <Rectangle Width="80" Height="80" Fill="LightGray" VerticalAlignment="Center" Margin="10"/>
-
-                            <StackPanel Grid.Column="1" Margin="10,12,10,48" Orientation="Horizontal">
-                                <TextBlock Text="{Binding name}" Foreground="Black" FontSize="14"/>
-                                <TextBlock Text="{Binding surname}" Foreground="Black" Margin="5,5,0,0"/>
-                                <TextBlock Text="{Binding patronymic}" Foreground="Black" Margin="5,5,0,0"/>
-
-                            </StackPanel>
-                            <StackPanel Grid.Column="1" Margin="10,50,10,5" Orientation="Horizontal">
-                                <TextBlock Text="{Binding gmail}" Foreground="Blue" Margin="5,5,0,0"/>
-                            </StackPanel>
+        <FlowDocumentReader x:Name="fldocumentreader" Grid.Row="2" Grid.Column="0" ViewingMode="Scroll" Grid.ColumnSpan="3" Margin="0,0,0,0">
+            <FlowDocument PageWidth="Auto">
+                <BlockUIContainer>
+                    <ListView Name="lViewEmployees" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Margin="5,5,5,5" d:ItemsSource="{d:SampleData ItemCount=1}" SelectionChanged="lViewEmployees_SelectionChanged">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Gray" BorderThickness="1" Background="White" Margin="5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="180"/>
+                                        </Grid.ColumnDefinitions>
 
 
-                            <Button Grid.Column="2" Content="Подробнее" HorizontalAlignment="Right" Margin="10" Click="Button_Click"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                        <Rectangle Width="80" Height="80" Fill="LightGray" VerticalAlignment="Center" Margin="10"/>
+
+                                        <StackPanel Grid.Column="1" Margin="10,12,10,48" Orientation="Horizontal">
+                                            <TextBlock Text="{Binding name}" Foreground="Black" FontSize="14"/>
+                                            <TextBlock Text="{Binding surname}" Foreground="Black" Margin="5,5,0,0"/>
+                                            <TextBlock Text="{Binding patronymic}" Foreground="Black" Margin="5,5,0,0"/>
+
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Margin="10,50,10,5" Orientation="Horizontal">
+                                            <TextBlock Text="{Binding gmail}" Foreground="Blue" Margin="5,5,0,0"/>
+                                        </StackPanel>
+
+
+                                        <Button Grid.Column="2" Content="Подробнее" HorizontalAlignment="Right" Margin="10" Click="Button_Click"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </BlockUIContainer>
+
+            </FlowDocument>
+        </FlowDocumentReader>
+
     </Grid>
 </Page>

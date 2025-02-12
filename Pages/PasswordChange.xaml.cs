@@ -70,9 +70,9 @@ namespace WpfAppAutorisation.Pages
             m.Subject = "Test";
             m.Body = $"Testing sending code: " + cod;
             SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 587);
-            smtp.EnableSsl = true;
-            smtp.Credentials = new NetworkCredential("danasuhacheva@yandex.ru", "gykbgrmnzertqhfd");
-            
+            smtp.EnableSsl = true; // Включает SSL-шифрование для безопасной отправки писем
+            smtp.Credentials = new NetworkCredential("danasuhacheva@yandex.ru", "gykbgrmnzertqhfd");// Устанавливает учетные данные для аутентификации на SMTP-сервер
+
             smtp.Send(m);
             MessageBox.Show("Email sent");
             btn1.Visibility = Visibility.Hidden;
@@ -91,6 +91,7 @@ namespace WpfAppAutorisation.Pages
             return code.ToString();
         }
 
+        // Обработчик нажатия кнопки подтверждения смены пароля, проверяет совпадение паролей и хеширует новый пароль перед сохранением в БД.
         private void tbcomfim_Click(object sender, RoutedEventArgs e)
         {
             SoundEntities db = SoundEntities.GetContext();
@@ -108,6 +109,9 @@ namespace WpfAppAutorisation.Pages
 
         }
 
+        /// <summary>
+        /// Обработчик кнопки подтверждения кода
+        /// </summary>
         private void btcom_Click(object sender, RoutedEventArgs e)
         {
             

@@ -27,6 +27,11 @@ namespace WpfAppAutorisation.Pages
     /// Логика взаимодействия для Autho.xaml
     /// </summary>
     public partial class Autho : Page
+    /*
+     Класс Autho отвечает за авторизацию пользователей в системе.
+     Включает проверку учетных данных, отправку кода подтверждения на email,
+      защиту от многократных неудачных попыток входа с использованием капчи и блокировки.
+     */
     {
         private int click;    
         private static int failedAttempts;
@@ -37,13 +42,13 @@ namespace WpfAppAutorisation.Pages
 
         public Autho()
         {
-            InitializeComponent(); //
-            click = 0;             //
+            InitializeComponent(); 
+            click = 0;            
             failedAttempts = 0;
-            lockTimer = new DispatcherTimer();
+            lockTimer = new DispatcherTimer(); //Создание таймера блокировки
             lockTimer.Interval = TimeSpan.FromSeconds(1);
             lockTimer.Tick += LockTimer_Tick;
-            ClearFields();   //
+            ClearFields();   
         }
 
         private void btnEnterGuest_Click(object sender, RoutedEventArgs e)   //
@@ -78,13 +83,13 @@ namespace WpfAppAutorisation.Pages
             var user = db.Authorization.Where(x => x.login == login && x.password == hash).FirstOrDefault();
             if(click <= 3)
             {
-                if (click == 1)
+                /*if (click == 1)
                 {
                     cod = GenerateCode();
                     SendMail(email, cod);
                     codetb.Visibility = Visibility.Visible;
                     
-                }
+                }*/
                 if (user != null)
                 {
                     if (user.Employees != null && !IsWorkingHours())
@@ -92,12 +97,12 @@ namespace WpfAppAutorisation.Pages
                         MessageBox.Show("Access denied. Working hours are from 10:00 to 19:00.");
                         return;
                     }
-                    string code = codetb.Text.Trim();
+                    /*string code = codetb.Text.Trim();
                     if (code == cod)
                     {
                         MessageBox.Show("You enter as: " + user.login.ToString());
                         LoadPage(user);
-                    }
+                    }*/
                 }
                 else
                 {
@@ -137,6 +142,10 @@ namespace WpfAppAutorisation.Pages
 
             }
         }
+        /// <summary>
+        /// Загрузка страницы после успешной авторизации
+        /// </summary>
+        /// <param name="user">Объект пользователя.</param>
         private void LoadPage(Models.Authorization user)
         {
             
@@ -283,6 +292,10 @@ namespace WpfAppAutorisation.Pages
                 return "Доброй ночи";
             }
         }
+        /// <summary>
+        /// Проверка рабочего времени (10:00 - 19:00)
+        /// </summary>
+        /// <returns>Возвращает true, если текущее время находится в диапазоне с 10:00 до 18:59 включительно, иначе false</returns>
         private bool IsWorkingHours()
         {
             int hour = DateTime.Now.Hour;

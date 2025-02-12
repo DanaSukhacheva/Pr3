@@ -60,7 +60,7 @@ namespace WpfAppAutorisation.Pages
                 string patronomic = TBpatronymic.Text;
                 string gmail = TBgmail.Text;
                 long jobtitle = cmbJob.SelectedIndex;
-                var newemployee = new Personal_data
+                var newemployee = new Personal_data // Создаём новый объект сотрудника
                 {
                     ID_personal_data = db.Personal_data.Max(x => x.ID_personal_data) + 1,
                     name = name,
@@ -69,11 +69,14 @@ namespace WpfAppAutorisation.Pages
                     telephone = "5345345",
                     gmail = gmail,
                 };
+
+                // Валидация введённых данных
                 var context = new ValidationContext(newemployee);
                 var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
                 StringBuilder sb = new StringBuilder();
                 if (!Validator.TryValidateObject(newemployee, context, results, true))
                 {
+                    // Если есть ошибки валидации, формируем сообщение об ошибках
                     foreach (var error in results)
                     {
                         sb.AppendLine(error.ErrorMessage);

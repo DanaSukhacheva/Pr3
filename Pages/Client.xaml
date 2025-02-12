@@ -22,42 +22,47 @@
             <RowDefinition/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-
+        <Button Content="Печать списка" Margin="80,32,80,2" Click="PrintListButton_Click" Grid.Column="1" Grid.RowSpan="2"/>
         <TextBox Name="txtSearch" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5, 0, 5, 0"/>
-        <ComboBox Name="cmsSorting" Grid.Row="1" Grid.Column="1" SelectedIndex="0" VerticalAlignment="Center" Margin="5, 0, 5, 0"/>
         <ComboBox Name="cmsFilter" Grid.Row="1" Grid.Column="2" SelectedIndex="0" Margin="5, 0, 5, 0" VerticalAlignment="Center"/>
 
-        <ListView Name="lViewServise" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Margin="5,5,10,5" >
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Gray" BorderThickness="1" Background="{Binding Background}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="180"/>
-                            </Grid.ColumnDefinitions>
+        <FlowDocumentReader x:Name="fldocumentreader" Grid.Row="2" Grid.Column="0" ViewingMode="Scroll" Grid.ColumnSpan="3" Margin="0,0,0,0">
+            <FlowDocument PageWidth="Auto">
+                <BlockUIContainer>
+                    <ListView Name="lViewServise" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Margin="5,5,10,5" >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Gray" BorderThickness="1" Background="{Binding Background}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="180"/>
+                                        </Grid.ColumnDefinitions>
 
-                            <Image Width="180" Height="180" Margin="5"/>
+                                        <Image Width="180" Height="180" Margin="5"/>
 
-                            <StackPanel Grid.Column="1" Margin="5">
-                                <TextBlock Text="{Binding name}" FontWeight="Bold"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding ProductCost}" TextDecorations="Strikethrough"/>
-                                    <TextBlock Text="{Binding price, StringFormat='\{0} рублей'}"/>
-                                </StackPanel>
-                            </StackPanel>
+                                        <StackPanel Grid.Column="1" Margin="5">
+                                            <TextBlock Text="{Binding name}" FontWeight="Bold"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding ProductCost}" TextDecorations="Strikethrough"/>
+                                                <TextBlock Text="{Binding price, StringFormat='\{0} рублей'}"/>
+                                            </StackPanel>
+                                        </StackPanel>
 
-                            <TextBlock Grid.Column="2" Text="{Binding ProductDiscountAmount, StringFormat='\{0} %'}" VerticalAlignment="Center"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                        <TextBlock Grid.Column="2" Text="{Binding ProductDiscountAmount, StringFormat='\{0} %'}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </BlockUIContainer>
+            </FlowDocument>
+        </FlowDocumentReader>
     </Grid>
 </Page>
