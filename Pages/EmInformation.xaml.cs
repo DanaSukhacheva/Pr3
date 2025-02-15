@@ -99,15 +99,9 @@ namespace WpfAppAutorisation.Pages
                 db.Employees.Add(empl);
                 db.SaveChanges();
                 MessageBox.Show("supersucssess");
-                try
-                {
+                NavigationService.Navigate(new EmploymentContract(newemployee));
+                
 
-
-                }
-                catch
-                {
-
-                }
 
                 if (currentEmployee != null)
                 {

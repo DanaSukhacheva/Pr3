@@ -81,7 +81,7 @@ namespace WpfAppAutorisation.Pages
             string hash = Hash.HashPassword(password);
 
             var user = db.Authorization.Where(x => x.login == login && x.password == hash).FirstOrDefault();
-            if(click <= 3)
+            if(click <= 1)
             {
                 /*if (click == 1)
                 {
@@ -97,6 +97,8 @@ namespace WpfAppAutorisation.Pages
                         MessageBox.Show("Access denied. Working hours are from 10:00 to 19:00.");
                         return;
                     }
+                    MessageBox.Show("You enter as: " + user.login.ToString());
+                    LoadPage(user);
                     /*string code = codetb.Text.Trim();
                     if (code == cod)
                     {
